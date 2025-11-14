@@ -28,8 +28,7 @@
             border: 1px solid #efe8df;
             display: flex;
             overflow: hidden;
-            /* === CORRECTION ICI === */
-            min-height: 90vh; /* Remplacé height par min-height */
+            min-height: 90vh; /* CORRIGÉ (était height) */
         }
 
         /* Panneau de Navigation (Gauche) */
@@ -94,7 +93,7 @@
             right: -26px;
         }
         
-        /* Nouveau bloc pour tout le pied de page de la navigation */
+        /* Bloc pour tout le pied de page de la navigation */
         .nav-footer {
             margin-top: auto; /* Pousse TOUT le bloc en bas du panneau */
             padding-top: 20px;
@@ -290,6 +289,72 @@
         }
         .model-link:hover .external-link-icon {
             color: #b08a5f;
+        }
+        
+        
+        /* === NOUVEAU BLOC DE CODE POUR LE RESPONSIVE === */
+        /* S'applique uniquement si l'écran fait 800px ou moins */
+        @media (max-width: 800px) {
+            body {
+                padding: 0; /* Pas de padding sur le body */
+            }
+
+            .container {
+                flex-direction: column; /* FAIT STACKER LES COLONNES */
+                width: 100%;
+                height: auto;           /* Hauteur auto */
+                min-height: 100vh;      /* Au moins la hauteur de l'écran */
+                border-radius: 0;       /* Pleine largeur sans bordure */
+                padding: 0;             /* Pas de padding sur le conteneur */
+            }
+
+            .nav-panel {
+                width: 100%;            
+                border-right: none;     /* Plus de bordure à droite */
+                border-bottom: 2px solid #efe8df; /* Mais une en bas */
+                padding: 20px;
+                box-sizing: border-box; /* S'assure que le padding est inclus */
+                height: auto;           /* Hauteur auto */
+                position: relative;     
+                right: 0 !important;
+            }
+
+            .content-panel {
+                width: 100%;            
+                padding: 20px;
+                box-sizing: border-box;
+                height: auto;           /* Hauteur auto */
+                overflow-y: visible;    /* Annule le scroll interne */
+            }
+
+            /* Corriger le bouton d'onglet actif */
+            .tab-button.active {
+                right: 0; /* Annule le décalage */
+                border-bottom: 2px solid #b08a5f; /* Ajoute un indicateur en bas */
+                border-radius: 8px; /* Rétablit tous les coins */
+                box-shadow: none; 
+            }
+
+            /* Corriger le pied de page du menu */
+            .nav-footer {
+                margin-top: 30px; /* Annule le 'auto', le met à la suite */
+            }
+
+            .main-title {
+                font-size: 1.8em; /* Titre légèrement plus petit */
+                margin-bottom: 20px;
+            }
+            
+            .artisan-logo {
+                max-width: 60%; /* Logo plus petit */
+                margin-bottom: 20px;
+            }
+            
+            .styled-table th,
+            .styled-table td {
+                padding: 10px; /* Moins de padding dans les tableaux */
+                font-size: 0.9em; /* Texte plus petit pour tout rentrer */
+            }
         }
         
     </style>
