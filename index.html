@@ -28,7 +28,8 @@
             border: 1px solid #efe8df;
             display: flex;
             overflow: hidden;
-            height: 90vh; /* Hauteur fixe pour une meilleure mise en page */
+            /* === CORRECTION ICI === */
+            min-height: 90vh; /* Remplacé height par min-height */
         }
 
         /* Panneau de Navigation (Gauche) */
@@ -93,7 +94,6 @@
             right: -26px;
         }
         
-        /* --- CHANGEMENT ICI --- */
         /* Nouveau bloc pour tout le pied de page de la navigation */
         .nav-footer {
             margin-top: auto; /* Pousse TOUT le bloc en bas du panneau */
@@ -102,7 +102,7 @@
         }
 
         .lang-switcher {
-            /* margin-top: auto; SUPPRIMÉ D'ICI */
+            /* styles pour le conteneur des langues si nécessaire */
         }
         
         .lang-button {
