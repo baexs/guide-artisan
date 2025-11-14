@@ -93,10 +93,16 @@
             right: -26px;
         }
         
-        .lang-switcher {
-            margin-top: auto; /* Pousse le bloc en bas du panneau */
+        /* --- CHANGEMENT ICI --- */
+        /* Nouveau bloc pour tout le pied de page de la navigation */
+        .nav-footer {
+            margin-top: auto; /* Pousse TOUT le bloc en bas du panneau */
             padding-top: 20px;
             border-top: 1px solid #efe8df;
+        }
+
+        .lang-switcher {
+            /* margin-top: auto; SUPPRIMÉ D'ICI */
         }
         
         .lang-button {
@@ -137,18 +143,18 @@
         .footer-credit {
             margin-top: 20px;
             padding-top: 20px;
-            border-top: 1px solid #efe8df; /* Léger séparateur */
-            text-align: center; /* Centré dans le panneau */
+            border-top: 1px solid #efe8df; 
+            text-align: center; 
         }
         .footer-credit a {
             text-decoration: none;
-            color: #7b7060; /* Couleur douce */
+            color: #7b7060; 
             font-size: 0.95em;
             font-weight: 500;
             transition: color 0.2s ease;
         }
         .footer-credit a:hover {
-            color: #b08a5f; /* Couleur active au survol */
+            color: #b08a5f; 
         }
         .footer-icon {
             font-weight: bold;
@@ -302,31 +308,33 @@
             <button class="tab-button" onclick="openTab(event, 'durete')" id="tab-durete">Type de Dureté</button>
             <button class="tab-button" onclick="openTab(event, 'taille')" id="tab-taille">Choix de Taille</button>
             
-            <div class="lang-switcher">
-                <button class="lang-button active" onclick="changeLanguage('fr')" data-lang="fr">
-                    <span class="flag">🇫🇷</span> Français
-                </button>
-                <button class="lang-button" onclick="changeLanguage('en')" data-lang="en">
-                    <span class="flag">🇬🇧</span> English
-                </button>
-                <button class="lang-button" onclick="changeLanguage('es')" data-lang="es">
-                    <span class="flag">🇪🇸</span> Español
-                </button>
-            </div>
-            
-            <div class="footer-credit">
-                <a href="https://twitter.com/baexsFPS" target="_blank" rel="noopener noreferrer">
-                    <span class="footer-icon">𝕏</span> @baexsFPS
-                </a>
-            </div>
-            
-            <div class="footer-license">
-                <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">
-                    CC BY-NC-ND 4.0
-                </a>
-            </div>
-            
-        </div>
+            <div class="nav-footer">
+                
+                <div class="lang-switcher">
+                    <button class="lang-button active" onclick="changeLanguage('fr')" data-lang="fr">
+                        <span class="flag">🇫🇷</span> Français
+                    </button>
+                    <button class="lang-button" onclick="changeLanguage('en')" data-lang="en">
+                        <span class="flag">🇬🇧</span> English
+                    </button>
+                    <button class="lang-button" onclick="changeLanguage('es')" data-lang="es">
+                        <span class="flag">🇪🇸</span> Español
+                    </button>
+                </div>
+                
+                <div class="footer-credit">
+                    <a href="https://twitter.com/baexsFPS" target="_blank" rel="noopener noreferrer">
+                        <span class="footer-icon">𝕏</span> @baexsFPS
+                    </a>
+                </div>
+                
+                <div class="footer-license">
+                    <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">
+                        CC BY-NC-ND 4.0
+                    </a>
+                </div>
+                
+            </div> </div>
 
         <div class="content-panel">
 
@@ -652,7 +660,7 @@
             'durete-soft-comm': {
                 fr: 'Une dureté équilibrée, offrant un bon compromis entre confort, contrôle et glisse. Moins de "sinking" que le XSOFT.',
                 en: 'A balanced hardness, offering a good compromise between comfort, control, and glide. Less "sinking" than XSOFT.',
-                es: 'Una dureté équilibrada, que ofrece un buen equilibrio entre comodidad, control y deslizamiento. Menos "hundimiento" que el XSOFT.'
+                es: 'Una dureza equilibrada, que ofrece un buen equilibrio entre comodidad, control y deslizamiento. Menos "hundimiento" que el XSOFT.'
             },
             'durete-mid-comm': {
                 fr: 'La plus ferme des duretés en tissu, offrant la glisse la plus rapide et le moins d\'enfoncement. Sensation plus directe et plus "speedy".',
