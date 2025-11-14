@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide pour les Tapis Artisan</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f3ed;
+            color: #333;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1300px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid #efe8df;
+            display: flex;
+            overflow: hidden;
+            height: 90vh; /* Hauteur fixe pour une meilleure mise en page */
+        }
+
+        /* Panneau de Navigation (Gauche) */
+        .nav-panel {
+            width: 25%;
+            min-width: 220px;
+            background-color: #fdfaf5;
+            padding: 40px 25px;
+            border-right: 1px solid #efe8df;
+            display: flex;
+            flex-direction: column; /* Important pour les éléments en bas */
+        }
+
+        /* Styles pour le logo Artisan */
+        .artisan-logo {
+            max-width: 80%; /* Pour qu'il ne soit pas trop grand */
+            height: auto;
+            display: block; /* Pour centrer l'image */
+            margin: 0 auto 30px auto; /* Centre et ajoute de l'espace en dessous */
+            opacity: 0.85; /* Légèrement moins opaque pour un look intégré */
+        }
+
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            color: #4a3c31;
+            font-size: 2.2em;
+            margin-bottom: 35px;
+            font-weight: 700;
+            line-height: 1.3;
+            text-align: center; /* Centrer le titre */
+        }
+
+        .tab-button {
+            background-color: transparent;
+            border: none;
+            color: #7b7060;
+            padding: 16px 20px;
+            cursor: pointer;
+            font-size: 1.05em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            outline: none;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            text-align: left;
+            width: 100%;
+        }
+
+        .tab-button:hover {
+            color: #4a3c31;
+            background-color: #f0e9e0;
+        }
+
+        .tab-button.active {
+            color: #b08a5f;
+            background-color: #ffffff;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            position: relative;
+            right: -26px;
+        }
+        
+        .lang-switcher {
+            margin-top: auto; /* Pousse le bloc en bas du panneau */
+            padding-top: 20px;
+            border-top: 1px solid #efe8df;
+        }
+        
+        .lang-button {
+            background: transparent;
+            border: 1px solid #e0d8cc;
+            color: #7b7060;
+            padding: 10px 15px;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            border-radius: 6px;
+            margin-bottom: 5px;
+            transition: all 0.2s ease;
+            font-size: 0.9em;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+        
+        .lang-button:hover {
+            background: #f7f3ed;
+            border-color: #b08a5f;
+            color: #4a3c31;
+        }
+        
+        .lang-button.active {
+            background: #b08a5f;
+            color: #ffffff;
+            border-color: #b08a5f;
+            font-weight: 600;
+        }
+        
+        .lang-button .flag {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        
+        .footer-credit {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #efe8df; /* Léger séparateur */
+            text-align: center; /* Centré dans le panneau */
+        }
+        .footer-credit a {
+            text-decoration: none;
+            color: #7b7060; /* Couleur douce */
+            font-size: 0.95em;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        .footer-credit a:hover {
+            color: #b08a5f; /* Couleur active au survol */
+        }
+        .footer-icon {
+            font-weight: bold;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        
+        .footer-license {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.8em;
+        }
+        .footer-license a {
+            text-decoration: none;
+            color: #a0a0a0;
+            transition: color 0.2s ease;
+        }
+        .footer-license a:hover {
+            color: #b08a5f;
+        }
+
+
+        /* Panneau de Contenu (Droite) */
+        .content-panel {
+            width: 75%;
+            padding: 40px;
+            overflow-y: auto; 
+            height: 100%;
+            box-sizing: border-box; 
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block; 
+        }
+
+        .section-subtitle {
+            font-family: 'Playfair Display', serif;
+            color: #4a3c31;
+            font-size: 2em;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            color: #333;
+            border: 1px solid #e0d8cc;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .styled-table th,
+        .styled-table td {
+            border: 1px solid #f0e9e0;
+            padding: 15px;
+            text-align: left;
+            vertical-align: middle;
+            font-size: 0.95em;
+        }
+
+        .styled-table th {
+            background-color: #f7f3ed;
+            font-weight: 700;
+            color: #6a5b4a;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.03em;
+        }
+
+        .styled-table tr:nth-child(even) {
+            background-color: #fdfaf5;
+        }
+        .styled-table tr:hover {
+            background-color: #f0e9e0;
+        }
+
+        .styled-table td[rowspan] {
+            vertical-align: top;
+            padding-top: 20px;
+            font-weight: 500;
+            color: #4a3c31;
+        }
+
+        .color-code-wrapper {
+            display: flex;
+            align-items: center;
+        }
+        .color-code {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+        
+        .glisse-rapide { background-color: #73a580; }
+        .glisse-moyen { background-color: #e59866; }
+        .glisse-lent { background-color: #d16666; }
+        .ctrl-bon { background-color: #73a580; }
+        .ctrl-moyen { background-color: #e59866; }
+        .ctrl-difficile { background-color: #d16666; }
+        
+        .footnote {
+            font-size: 0.85em;
+            color: #7b7060;
+            margin-top: 20px;
+            text-align: left;
+        }
+        
+        .model-link {
+            text-decoration: none;
+            color: #4a3c31;
+            font-weight: 600;
+            transition: color 0.2s ease, text-decoration 0.2s ease;
+        }
+        .model-link:hover {
+            color: #b08a5f;
+            text-decoration: underline;
+        }
+        .external-link-icon {
+            font-size: 0.8em;
+            vertical-align: super;
+            margin-left: 2px;
+            color: #7b7060;
+        }
+        .model-link:hover .external-link-icon {
+            color: #b08a5f;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="nav-panel">
+            
+            <img src="https://github.com/baexs/guide-artisan/blob/main/Artisan-Brand-logo-v2.png?raw=true" alt="Logo Artisan" class="artisan-logo">
+            
+            <h1 class="main-title" id="main-title">Guide pour les Tapis Artisan</h1>
+            
+            <button class="tab-button active" onclick="openTab(event, 'tapis')" id="tab-tapis">Type de Tapis</button>
+            <button class="tab-button" onclick="openTab(event, 'durete')" id="tab-durete">Type de Dureté</button>
+            <button class="tab-button" onclick="openTab(event, 'taille')" id="tab-taille">Choix de Taille</button>
+            
+            <div class="lang-switcher">
+                <button class="lang-button active" onclick="changeLanguage('fr')" data-lang="fr">
+                    <span class="flag">🇫🇷</span> Français
+                </button>
+                <button class="lang-button" onclick="changeLanguage('en')" data-lang="en">
+                    <span class="flag">🇬🇧</span> English
+                </button>
+                <button class="lang-button" onclick="changeLanguage('es')" data-lang="es">
+                    <span class="flag">🇪🇸</span> Español
+                </button>
+            </div>
+            
+            <div class="footer-credit">
+                <a href="https://twitter.com/baexsFPS" target="_blank" rel="noopener noreferrer">
+                    <span class="footer-icon">𝕏</span> @baexsFPS
+                </a>
+            </div>
+            
+            <div class="footer-license">
+                <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">
+                    CC BY-NC-ND 4.0
+                </a>
+            </div>
+            
+        </div>
+
+        <div class="content-panel">
+
+            <div id="tapis" class="tab-content active"> 
+                <h2 class="section-subtitle" id="subtitle-tapis">Type de Tapis</h2>
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th id="th-categorie">Catégorie</th>
+                            <th id="th-modele">Modèle</th>
+                            <th id="th-glisse">Glisse</th>
+                            <th id="th-controle">Contrôle</th>
+                            <th id="th-reco">Recommandations et Notes Spécifiques</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="2" id="cat-basse-vitesse">Basse Vitesse</td>
+                            <td><a href="https://artisan-jp.com/global/fx-t99" target="_blank" rel="noopener noreferrer" class="model-link">TYPE-99 <span class="external-link-icon">↗</span></a></td>
+                            <td><div class="color-code-wrapper"><span class="color-code glisse-lent"></span><span id="glisse-lent">Lente</span></div></td>
+                            <td><div class="color-code-wrapper"><span class="color-code ctrl-bon"></span><span id="ctrl-bon-1">Bon</span></div></td>
+                            <td id="tapis-type99-reco">FPS Tactiques (Précision pure) : Valorant, CS2. Pour un "freinage très élevé".<br>
+                                Patins Recommandés : Tiger Arc 1 (pour garder le contrôle) ou Corepad CTRL.</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://artisan-jp.com/global/fx-zero" target="_blank" rel="noopener noreferrer" class="model-link">ZÉRO <span class="external-link-icon">↗</span></a></td>
+                            <td><div class="color-code-wrapper"><span class="color-code glisse-moyen"></span><span id="glisse-moyen-1">Moyenne</span></div></td>
+                            <td><div class="color-code-wrapper"><span class="color-code ctrl-bon"></span><span id="ctrl-bon-2">Bon</span></div></td>
+                            <td id="tapis-zero-reco">FPS Tactiques (Le Standard) : Valorant, CS2, R6. "Démarrage vif" et "fort arrêt".<br>
+                                Patins Recommandés : Corepad PRO ou Tiger Ice V2 (très polyvalents).</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="4" id="cat-vitesse-moyenne">Vitesse Moyenne</td>
+                            <td><a href="https://artisan-jp.com/global/fx-hyk" target="_blank" rel="noopener noreferrer" class="model-link">HAYATE-KOU <span class="external-link-icon">↗</span></a></td>
+                            <td><div class="color-code-wrapper"><span class="color-code glisse-moyen"></span><span id="glisse-moyen-2">Moyenne</span></div></td>
+                            <td><div class="color-code-wrapper"><span class="color-code ctrl-bon"></span><span id="ctrl-bon-3">Bon</span></div></td>
+                            <td id="tapis-kou-reco">Hybride Contrôle : Pour ceux qui trouvent le Zéro trop lent mais veulent un "freinage renforcé".<br>
+                                Patins Recommandés : Tiger Ice V2 ou Artisan Dots (Type "contrôle").</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://artisan-jp.com/global/fx-k83" target="_blank" rel="noopener noreferrer" class="model-link">CLÉ-03 (Key-03) <span class="external-link-icon">↗</span></a></td>
+                            <td><div class="color-code-wrapper"><span class="color-code glisse-moyen"></span><span id="glisse-moyen-3">Moyenne</span></div></td>
+                            <td><div class="color-code-wrapper"><span class="color-code ctrl-moyen"></span><span id="ctrl-moyen-1">Moyen</span></div></td>
+                            <td id="tapis-key03-reco">Polyvalent / Tous FPS : Valorant, Apex, CoD. Glisse fluide et équilibrée.<br>
+                                Patins Recommandés : Tiger Ice V2 (le meilleur équilibre).</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://artisan-jp.com/global/fx-hyo2" target="_blank" rel="noopener noreferrer" class="model-link">HAYATE-OTSU <span class="external-link-icon">↗</span></a></td>
+                            <td><div class="color-code-wrapper"><span class="color-code glisse-rapide"></span><span id="glisse-rapide-1">Rapide</span></div></td>
+                            <td><div class="color-code-wrapper"><span class="color-code ctrl-moyen"></span><span id="ctrl-moyen-2">Moyen</span></div></td>
+                            <td id="tapis-otsu-reco">FPS Tracking (Le Favori) : Apex Legends, CoD, Overwatch. Le meilleur équilibre vitesse/freinage.<br>
+                                Patins Recommandés : Tiger Ice V2 ou Mizugumo Futae R#.</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://artisan-jp.com/global/fx-hien" target="_blank" rel="noopener noreferrer" class="model-link">HIEN <span class="external-link-icon">↗</span></a></td>
+                            <td><div class="color-code-wrapper"><span class="color-code glisse-rapide"></span><span id="glisse-rapide-2">Rapide</span></div></td>
+                            <td><div class="color-code-wrapper"><span class="color-code ctrl-moyen"></span><span id="ctrl-moyen-3">Moyen</span></div></td>
+                            <td id="tapis-hien-reco">FPS Tracking (Agressif) : Apex, Quake. Texture rugueuse, "démarrage net".<br>
+                                ⚠️ Ne jamais utiliser de patins en verre.</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" id="cat-grande-vitesse">Grande Vitesse</td>
+                            <td><a href="https://artisan-jp.com/global/fx-rd" target="_blank" rel="noopener noreferrer" class="model-link">RAIDEN <span class="external-link-icon">↗</span></a></td>
+                            <td><div class="color-code-wrapper"><span class="color-code glisse-rapide"></span><span id="glisse-rapide-3">Rapide</span></div></td>
+                            <td><div class="color-code-wrapper"><span class="color-code ctrl-difficile"></span><span id="ctrl-difficile-1">Difficile</span></div></td>
+                            <td id="tapis-raiden-reco">Jeux "Arena" / Vitesse : Quake. "Vitesse extrême" sur tissu.<br>
+                                ⚠️ Risque de "spin-out" (décrochage) avec certains capteurs.</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://artisan-jp.com/global/fx-sk2" target="_blank" rel="noopener noreferrer" class="model-link">SHIDENKAI V2 <span class="external-link-icon">↗</span></a></td>
+                            <td><div class="color-code-wrapper"><span class="color-code glisse-rapide"></span><span id="glisse-tres-rapide">Très Rapide</span></div></td>
+                            <td><div class="color-code-wrapper"><span class="color-code ctrl-difficile"></span><span id="ctrl-difficile-2">Difficile</span></div></td>
+                            <td id="tapis-shidenkai-reco">Vitesse Extrême : Surface en billes de verre. Glisse comme sur de la glace.<br>
+                                ⚠️ Use les patins PTFE très vite.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="durete" class="tab-content">
+                <h2 class="section-subtitle" id="subtitle-durete">Type de Dureté</h2>
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th id="th-durete">Dureté</th>
+                            <th id="th-epaisseur">Épaisseur</th>
+                            <th id="th-comm-durete">Commentaire</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>XSOFT</td>
+                            <td>4 mm</td>
+                            <td id="durete-xsoft-comm">Le plus mou. Offre le plus de "sinking" (enfoncement du doigt/souris), résultant en un meilleur contrôle et une sensation très douce. Idéal pour les micro-ajustements.</td>
+                        </tr>
+                        <tr>
+                            <td>SOFT</td>
+                            <td>4 mm</td>
+                            <td id="durete-soft-comm">Une dureté équilibrée, offrant un bon compromis entre confort, contrôle et glisse. Moins de "sinking" que le XSOFT.</td>
+                        </tr>
+                        <tr>
+                            <td>MID</td>
+                            <td>3.5 mm</td>
+                            <td id="durete-mid-comm">La plus ferme des duretés en tissu, offrant la glisse la plus rapide et le moins d'enfoncement. Sensation plus directe et plus "speedy".</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="footnote" id="durete-footnote">
+                    Note : Tous les modèles Artisan (Zero, Hien, Otsu, etc.) sont généralement disponibles dans ces trois duretés.
+                </p>
+            </div>
+
+            <div id="taille" class="tab-content">
+                <h2 class="section-subtitle" id="subtitle-taille">Choix de Taille</h2>
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th id="th-taille">Taille</th>
+                            <th id="th-dims">Largeur x Hauteur</th>
+                            <th id="th-sensi">Sensibilité(s) Idéale(s)</th>
+                            <th id="th-comm-taille">Type d'Utilisation & Commentaire</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>S</td>
+                            <td>240 mm x 210 mm</td>
+                            <td id="sensi-haute-1">Haute</td>
+                            <td id="taille-s-comm">Non recommandé pour le jeu. Uniquement pour de la bureautique très limitée.</td>
+                        </tr>
+                        <tr>
+                            <td>M</td>
+                            <td>310 mm x 240 mm</td>
+                            <td id="sensi-haute-2">Haute</td>
+                            <td id="taille-m-comm">Gaming possible si l'espace est extrêmement restreint (ex: sur un laptop).</td>
+                        </tr>
+                        <tr>
+                            <td>L</td>
+                            <td>420 mm x 330 mm</td>
+                            <td id="sensi-haute-moyenne">Haute / Moyenne</td>
+                            <td id="taille-l-comm">Une très bonne taille polyvalente si la XL est trop grand pour ton bureau.</td>
+                        </tr>
+                        <tr>
+                            <td>XL (Le Standard)</td>
+                            <td>490 mm x 420 mm</td>
+                            <td id="sensi-moyenne-basse">Moyenne / Basse</td>
+                            <td id="taille-xl-comm">La taille "standard de facto" pour les joueurs sérieux (FPS, etc.). Idéale pour les mouvements de bras et de poignet.</td>
+                        </tr>
+                        <tr>
+                            <td>XXL</td>
+                            <td>500 mm x 490 mm</td>
+                            <td id="sensi-basse-tres-basse">Basse / Très Basse</td>
+                            <td id="taille-xxl-comm">Pour les joueurs "low-sens" extrêmes qui ont besoin d'un maximum d'espace vertical, ou ceux qui aiment poser leur clavier sur le tapis.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Dictionnaire de traduction ---
+        const translations = {
+            'main-title': {
+                fr: 'Guide pour les Tapis Artisan',
+                en: 'Artisan Mousepad Guide',
+                es: 'Guía de Alfombrillas Artisan'
+            },
+            'tab-tapis': {
+                fr: 'Type de Tapis',
+                en: 'Pad Type',
+                es: 'Tipo de Alfombrilla'
+            },
+            'tab-durete': {
+                fr: 'Type de Dureté',
+                en: 'Hardness Type',
+                es: 'Tipo de Dureza'
+            },
+            'tab-taille': {
+                fr: 'Choix de Taille',
+                en: 'Size Choice',
+                es: 'Elección de Tamaño'
+            },
+            'subtitle-tapis': {
+                fr: 'Type de Tapis',
+                en: 'Pad Type',
+                es: 'Tipo de Alfombrilla'
+            },
+            'subtitle-durete': {
+                fr: 'Type de Dureté',
+                en: 'Hardness Type',
+                es: 'Tipo de Dureza'
+            },
+            'subtitle-taille': {
+                fr: 'Choix de Taille',
+                en: 'Size Choice',
+                es: 'Elección de Tamaño'
+            },
+            'th-categorie': {
+                fr: 'Catégorie',
+                en: 'Category',
+                es: 'Categoría'
+            },
+            'th-modele': {
+                fr: 'Modèle',
+                en: 'Model',
+                es: 'Modelo'
+            },
+            'th-glisse': {
+                fr: 'Glisse',
+                en: 'Glide',
+                es: 'Deslizamiento'
+            },
+            'th-controle': {
+                fr: 'Contrôle',
+                en: 'Control',
+                es: 'Control'
+            },
+            'th-reco': {
+                fr: 'Recommandations et Notes',
+                en: 'Recommendations & Notes',
+                es: 'Recomendaciones y Notas'
+            },
+            'cat-basse-vitesse': {
+                fr: 'Basse Vitesse',
+                en: 'Low Speed',
+                es: 'Baja Velocidad'
+            },
+            'cat-vitesse-moyenne': {
+                fr: 'Vitesse Moyenne',
+                en: 'Medium Speed',
+                es: 'Velocidad Media'
+            },
+            'cat-grande-vitesse': {
+                fr: 'Grande Vitesse',
+                en: 'High Speed',
+                es: 'Alta Velocidad'
+            },
+            'glisse-lent': {
+                fr: 'Lente',
+                en: 'Slow',
+                es: 'Lento'
+            },
+            'glisse-moyen-1': { fr: 'Moyenne', en: 'Medium', es: 'Medio' },
+            'glisse-moyen-2': { fr: 'Moyenne', en: 'Medium', es: 'Medio' },
+            'glisse-moyen-3': { fr: 'Moyenne', en: 'Medium', es: 'Medio' },
+            'glisse-rapide-1': { fr: 'Rapide', en: 'Fast', es: 'Rápido' },
+            'glisse-rapide-2': { fr: 'Rapide', en: 'Fast', es: 'Rápido' },
+            'glisse-rapide-3': { fr: 'Rapide', en: 'Fast', es: 'Rápido' },
+            'glisse-tres-rapide': {
+                fr: 'Très Rapide',
+                en: 'Very Fast',
+                es: 'Muy Rápido'
+            },
+            'ctrl-bon-1': { fr: 'Bon', en: 'Good', es: 'Bueno' },
+            'ctrl-bon-2': { fr: 'Bon', en: 'Good', es: 'Bueno' },
+            'ctrl-bon-3': { fr: 'Bon', en: 'Good', es: 'Bueno' },
+            'ctrl-moyen-1': { fr: 'Moyen', en: 'Medium', es: 'Medio' },
+            'ctrl-moyen-2': { fr: 'Moyen', en: 'Medium', es: 'Medio' },
+            'ctrl-moyen-3': { fr: 'Moyen', en: 'Medium', es: 'Medio' },
+            'ctrl-difficile-1': { fr: 'Difficile', en: 'Difficult', es: 'Difícil' },
+            'ctrl-difficile-2': { fr: 'Difficile', en: 'Difficult', es: 'Difícil' },
+            'tapis-type99-reco': {
+                fr: 'FPS Tactiques (Précision pure) : Valorant, CS2. Pour un "freinage très élevé".<br>Patins Recommandés : Tiger Arc 1 (pour garder le contrôle) ou Corepad CTRL.',
+                en: 'Tactical FPS (Pure precision): Valorant, CS2. For "very high stopping power".<br>Recommended Skates: Tiger Arc 1 (to maintain control) or Corepad CTRL.',
+                es: 'FPS Tácticos (Precisión pura): Valorant, CS2. Para un "frenado muy alto".<br>Patines Recomendados: Tiger Arc 1 (para mantener el control) o Corepad CTRL.'
+            },
+            'tapis-zero-reco': {
+                fr: 'FPS Tactiques (Le Standard) : Valorant, CS2, R6. "Démarrage vif" et "fort arrêt".<br>Patins Recommandés : Corepad PRO ou Tiger Ice V2 (très polyvalents).',
+                en: 'Tactical FPS (The Standard): Valorant, CS2, R6. "Quick start" and "strong stop".<br>Recommended Skates: Corepad PRO or Tiger Ice V2 (very versatile).',
+                es: 'FPS Tácticos (El Estándar): Valorant, CS2, R6. "Arranque rápido" y "parada fuerte".<br>Patines Recomendados: Corepad PRO o Tiger Ice V2 (muy versátiles).'
+            },
+            'tapis-kou-reco': {
+                fr: 'Hybride Contrôle : Pour ceux qui trouvent le Zéro trop lent mais veulent un "freinage renforcé".<br>Patins Recommandés : Tiger Ice V2 ou Artisan Dots (Type "contrôle").',
+                en: 'Control Hybrid: For those who find Zero too slow but want "reinforced stopping power".<br>Recommended Skates: Tiger Ice V2 or Artisan Dots ("control" type).',
+                es: 'Híbrido de Control: Para quienes el Zero es muy lento pero quieren un "frenado reforzado".<br>Patines Recomendados: Tiger Ice V2 o Artisan Dots (tipo "control").'
+            },
+            'tapis-key03-reco': {
+                fr: 'Polyvalent / Tous FPS : Valorant, Apex, CoD. Glisse fluide et équilibrée.<br>Patins Recommandés : Tiger Ice V2 (le meilleur équilibre).',
+                en: 'Versatile / All-Purpose FPS: Valorant, Apex, CoD. Smooth and balanced glide.<br>Recommended Skates: Tiger Ice V2 (the best balance).',
+                es: 'Versátil / Todo FPS: Valorant, Apex, CoD. Deslizamiento fluido y equilibrado.<br>Patines Recomendados: Tiger Ice V2 (el mejor equilibrio).'
+            },
+            'tapis-otsu-reco': {
+                fr: 'FPS Tracking (Le Favori) : Apex Legends, CoD, Overwatch. Le meilleur équilibre vitesse/freinage.<br>Patins Recommandés : Tiger Ice V2 ou Mizugumo Futae R#.',
+                en: 'Tracking FPS (The Favorite): Apex Legends, CoD, Overwatch. The best speed/stopping balance.<br>Recommended Skates: Tiger Ice V2 or Mizugumo Futae R#.',
+                es: 'Tracking FPS (El Favorito): Apex Legends, CoD, Overwatch. El mejor equilibrio velocidad/frenado.<br>Patines Recomendados: Tiger Ice V2 o Mizugumo Futae R#.'
+            },
+            'tapis-hien-reco': {
+                fr: 'FPS Tracking (Agressif) : Apex, Quake. Texture rugueuse, "démarrage net".<br>⚠️ Ne jamais utiliser de patins en verre.',
+                en: 'Aggressive Tracking FPS: Apex, Quake. Rough texture, "sharp start".<br>⚠️ Never use glass skates.',
+                es: 'Tracking FPS (Agresivo): Apex, Quake. Textura rugosa, "arranque nítido".<br>⚠️ Nunca usar patines de cristal.'
+            },
+            'tapis-raiden-reco': {
+                fr: 'Jeux "Arena" / Vitesse : Quake. "Vitesse extrême" sur tissu.<br>⚠️ Risque de "spin-out" (décrochage) avec certains capteurs.',
+                en: '"Arena" Games / Speed: Quake. "Extreme speed" on cloth.<br>⚠️ Risk of "spin-out" with some sensors.',
+                es: 'Juegos "Arena" / Velocidad: Quake. "Velocidad extrema" en tela.<br>⚠️ Riesgo de "spin-out" (pérdida de seguimiento) con algunos sensores.'
+            },
+            'tapis-shidenkai-reco': {
+                fr: 'Vitesse Extrême : Surface en billes de verre. Glisse comme sur de la glace.<br>⚠️ Use les patins PTFE très vite.',
+                en: 'Extreme Speed: Glass bead surface. Glides like on ice.<br>⚠️ Wears down PTFE skates very fast.',
+                es: 'Velocidad Extrema: Superficie de microesferas de cristal. Desliza como sobre hielo.<br>⚠️ Desgasta los patines de PTFE muy rápido.'
+            },
+            'th-durete': {
+                fr: 'Dureté',
+                en: 'Hardness',
+                es: 'Dureza'
+            },
+            'th-epaisseur': {
+                fr: 'Épaisseur',
+                en: 'Thickness',
+                es: 'Grosor'
+            },
+            'th-comm-durete': {
+                fr: 'Commentaire',
+                en: 'Comment',
+                es: 'Comentario'
+            },
+            'durete-xsoft-comm': {
+                fr: 'Le plus mou. Offre le plus de "sinking" (enfoncement du doigt/souris), résultant en un meilleur contrôle et une sensation très douce. Idéal pour les micro-ajustements.',
+                en: 'The softest. Offers the most "sinking", resulting in better control and a very soft feel. Ideal for micro-adjustments.',
+                es: 'El más blando. Ofrece el mayor "hundimiento", lo que resulta en un mejor control y una sensación muy suave. Ideal para microajustes.'
+            },
+            'durete-soft-comm': {
+                fr: 'Une dureté équilibrée, offrant un bon compromis entre confort, contrôle et glisse. Moins de "sinking" que le XSOFT.',
+                en: 'A balanced hardness, offering a good compromise between comfort, control, and glide. Less "sinking" than XSOFT.',
+                es: 'Una dureté équilibrada, que ofrece un buen equilibrio entre comodidad, control y deslizamiento. Menos "hundimiento" que el XSOFT.'
+            },
+            'durete-mid-comm': {
+                fr: 'La plus ferme des duretés en tissu, offrant la glisse la plus rapide et le moins d\'enfoncement. Sensation plus directe et plus "speedy".',
+                en: 'The firmest of the cloth hardnesses, offering the fastest glide and the least sinking. Feels more direct and "speedy".',
+                es: 'La más firme de las durezas de tela, que ofrece el deslizamiento más rápido y el menor hundimiento. Sensación más directa y "rápida".'
+            },
+            'durete-footnote': {
+                fr: 'Note : Tous les modèles Artisan (Zero, Hien, Otsu, etc.) sont généralement disponibles dans ces trois duretés.',
+                en: 'Note: All Artisan models (Zero, Hien, Otsu, etc.) are generally available in these three hardnesses.',
+                es: 'Nota: Todos los modelos de Artisan (Zero, Hien, Otsu, etc.) están generalmente disponibles en estas tres durezas.'
+            },
+            'th-taille': {
+                fr: 'Taille',
+                en: 'Size',
+                es: 'Tamaño'
+            },
+            'th-dims': {
+                fr: 'Largeur x Hauteur',
+                en: 'Width x Height',
+                es: 'Ancho x Alto'
+            },
+            'th-sensi': {
+                fr: 'Sensibilité(s) Idéale(s)',
+                en: 'Ideal Sensitivity',
+                es: 'Sensibilidad Ideal'
+            },
+            'th-comm-taille': {
+                fr: 'Type d\'Utilisation & Commentaire',
+                en: 'Use Case & Comment',
+                es: 'Caso de Uso y Comentario'
+            },
+            'sensi-haute-1': { fr: 'Haute', en: 'High', es: 'Alta' },
+            'sensi-haute-2': { fr: 'Haute', en: 'High', es: 'Alta' },
+            'sensi-haute-moyenne': {
+                fr: 'Haute / Moyenne',
+                en: 'High / Medium',
+                es: 'Alta / Media'
+            },
+            'sensi-moyenne-basse': {
+                fr: 'Moyenne / Basse',
+                en: 'Medium / Low',
+                es: 'Media / Baja'
+            },
+            'sensi-basse-tres-basse': {
+                fr: 'Basse / Très Basse',
+                en: 'Low / Very Low',
+                es: 'Baja / Muy Baja'
+            },
+            'taille-s-comm': {
+                fr: 'Non recommandé pour le jeu. Uniquement pour de la bureautique très limitée.',
+                en: 'Not recommended for gaming. Only for very limited office use.',
+                es: 'No recomendado para jugar. Solo para uso de oficina muy limitado.'
+            },
+            'taille-m-comm': {
+                fr: 'Gaming possible si l\'espace est extrêmement restreint (ex: sur un laptop).',
+                en: 'Gaming is possible if space is extremely limited (e.g., on a laptop).',
+                es: 'Posible para jugar si el espacio es extremadamente limitado (ej: en un portátil).'
+            },
+            'taille-l-comm': {
+                fr: 'Une très bonne taille polyvalente si la XL est trop grand pour ton bureau.',
+                en: 'A very good all-around size if the XL is too big for your desk.',
+                es: 'Un tamaño muy versátil si el XL es demasiado grande para tu escritorio.'
+            },
+            'taille-xl-comm': {
+                fr: 'La taille "standard de facto" pour les joueurs sérieux (FPS, etc.). Idéale pour les mouvements de bras et de poignet.',
+                en: 'The "de facto standard" size for serious gamers (FPS, etc.). Ideal for arm and wrist movements.',
+                es: 'El tamaño "estándar de facto" para jugadores serios (FPS, etc.). Ideal para movimientos de brazo y muñeca.'
+            },
+            'taille-xxl-comm': {
+                fr: 'Pour les joueurs "low-sens" extrêmes qui ont besoin d\'un maximum d\'espace vertical, ou ceux qui aiment poser leur clavier sur le tapis.',
+                en: 'For extreme "low-sens" players who need maximum vertical space, or those who like to place their keyboard on the mat.',
+                es: 'Para jugadores de "low-sens" extrema que necesitan el máximo espacio vertical, o aquellos a quienes les gusta poner el teclado sobre la alfombrilla.'
+            }
+        };
+
+
+        // --- Fonction pour changer d'onglet ---
+        function openTab(evt, tabName) {
+            var i, tabcontent, tabbuttons;
+            
+            tabcontent = document.querySelectorAll(".content-panel .tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            
+            tabbuttons = document.querySelectorAll(".nav-panel .tab-button");
+            for (i = 0; i < tabbuttons.length; i++) {
+                tabbuttons[i].className = tabbuttons[i].className.replace(" active", "");
+            }
+            
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        
+        // --- Fonction pour changer de langue ---
+        function changeLanguage(lang) {
+            for (const key in translations) {
+                const element = document.getElementById(key);
+                if (element) {
+                    if (translations[key][lang]) {
+                        element.innerHTML = translations[key][lang];
+                    } else {
+                        element.innerHTML = translations[key]['en']; // Fallback en anglais
+                    }
+                }
+            }
+            
+            const langButtons = document.querySelectorAll(".lang-button");
+            langButtons.forEach(button => {
+                button.classList.remove('active');
+                if (button.dataset.lang === lang) {
+                    button.classList.add('active');
+                }
+            });
+
+            document.documentElement.lang = lang;
+        }
+
+        // --- Au chargement de la page ---
+        document.addEventListener("DOMContentLoaded", function() {
+            changeLanguage('fr');
+            
+            var initialTab = document.querySelector('.tab-content.active');
+            if (initialTab) {
+                initialTab.style.display = 'block';
+            }
+        });
+    </script>
+
+</body>
+</html>
